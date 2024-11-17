@@ -1,17 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const API_URL = "http://localhost:8000"
+const API_URL = "https://tree-learning-app.alwaysdata.net"
 
 export const apiSlice = createApi({
-  reducerPath: 'api', // nom du createApi
+  reducerPath: 'app_module_api', // nom du createApi
   baseQuery: fetchBaseQuery({ 
     baseUrl: API_URL, // URL de l'application Symfony
     credentials: 'include',  // dans le header passer le token et des cookies
-    prepareHeaders: (headers : Headers) => {
-        console.log("test")
-      // retourner le hearders ????
+    prepareHeaders: (headers: Headers) => {
+      const accessToken = localStorage.getItem('accessToken')
+      if (accessToken) {
+        // Ajoute l'Authorization header si un access token est présent dans le local storage
+        headers.set('Authorization', `Bearer ${accessToken}`)
+      }
 
-      console.log(headers)
+      console.log(accessToken)
 
       return headers
     },

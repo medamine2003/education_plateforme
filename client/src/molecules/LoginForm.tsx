@@ -3,6 +3,7 @@ import Button from "../atoms/Button";
 import Checkbox from "../atoms/Checkbox";
 import Input from "../atoms/Input";
 import { useLoginMutation } from "../api/endpoints/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -11,6 +12,7 @@ const LoginForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [login, { isLoading }] = useLoginMutation();
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,13 +23,14 @@ const LoginForm: React.FC = () => {
     } else {
       try {
         const response = await login({ email, password }).unwrap();
-        console.log(response.email, response.password);
+        console.log(response);
+
+        
+        navigate('/modules');
       } catch (err: any) {
         setError('Une erreur est survenue');
       }
-
     }
-
   };
 
   return (

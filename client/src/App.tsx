@@ -1,13 +1,20 @@
 import React from 'react';
-//import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginTemplate from './templates/LoginTemplate';
-//import Home from './pages/Home'; // Page d'accueil (vous devrez créer ce composant)
-//import Navbar from './organisms/Navbar'; // Barre de navigation simple avec des liens
-
+import Modules from './organisms/Modules';
+// import Home from './pages/Home'; // Page d'accueil (vous devrez créer ce composant)
+import ProtectedRoute from './routes/ProtectedRoute';
 const App: React.FC = () => {
-
     return (
-            <LoginTemplate />
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<LoginTemplate />} />
+                     <Route path="/modules" element={<ProtectedRoute component={Modules} />} />
+                   
+                </Routes>
+            </div>
+        </Router>
     );
 };
 

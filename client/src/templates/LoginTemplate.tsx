@@ -1,10 +1,12 @@
 import React from 'react';
 import LoginSection from '../organisms/LoginSection';
+import Navbar from '../organisms/Navbar';
 
 
 const LoginTemplate: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col lg:flex-row">
+            <Navbar/>
              <div className="flex-1 flex items-center justify-center p-6 bg-gray-100">
                 
                 <LoginSection  />
